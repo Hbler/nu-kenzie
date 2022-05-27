@@ -58,8 +58,6 @@ export default function List({
     },
   };
 
-  console.log(source);
-
   return (
     <section style={styles.listContainer}>
       <div style={styles.filterContainer}>
