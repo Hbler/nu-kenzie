@@ -74,7 +74,6 @@ export default function MainPage({ logingSetter, windowWidth }) {
             setToShow={setToShow}
             setter={setTransactions}
             original={transactions}
-            windowWidth={windowWidth}
           />
         )}
         <Total transactions={transactions} windowWidth={windowWidth} />
@@ -87,6 +86,7 @@ export default function MainPage({ logingSetter, windowWidth }) {
         />
         {modalVisible && (
           <FormModal
+            setToShow={setToShow}
             setter={setTransactions}
             original={transactions}
             visibility={setModalVisible}

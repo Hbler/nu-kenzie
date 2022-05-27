@@ -1,5 +1,6 @@
 import Filters from "./Filters";
 import Card from "./Card";
+import img from "../../../../img/NoCard.svg";
 
 export default function List({
   toShow,
@@ -43,7 +44,21 @@ export default function List({
 
       overflow: "scroll",
     },
+    img: {
+      width: "100%",
+      height: "100%",
+      marginTop:
+        windowWidth > 1260
+          ? "-10%"
+          : windowWidth > 768
+          ? "-20%"
+          : windowWidth > 425
+          ? "-15%"
+          : "-20%",
+    },
   };
+
+  console.log(source);
 
   return (
     <section style={styles.listContainer}>
@@ -55,7 +70,9 @@ export default function List({
           windowWidth={windowWidth}
         />
       </div>
+
       <ul style={styles.transactions}>
+        {source.length === 0 && <img src={img} alt="" style={styles.img} />}
         {toShow.map((transaction) => (
           <Card
             key={transaction.id}

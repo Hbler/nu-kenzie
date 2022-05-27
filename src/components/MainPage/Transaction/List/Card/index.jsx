@@ -22,8 +22,6 @@ export default function Card({ setToShow, setTransactions, original, obj }) {
   const removeTransaction = (e) => {
     const id = e.currentTarget.id;
     const removed = original.filter((obj) => obj.id !== id);
-    console.log(original);
-    console.log(removed);
 
     setTransactions(removed);
     setToShow(removed);

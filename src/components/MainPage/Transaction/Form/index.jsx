@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import PinkButton from "../../../Global/PinkButton";
 import "./style.css";
 
-export default function Form({ setToShow, setter, original, windowWidth }) {
+export default function Form({ setToShow, setter, original }) {
   const styles = {
     formContainer: {
       width: "30%",
