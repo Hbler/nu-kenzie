@@ -49,9 +49,6 @@ export default function FormModal({
               });
               updateTransactions();
             }
-            setDescription("");
-            setValue("");
-            setType("");
           }}
         >
           <FaTimes onClick={close} className="form__btn--close" />

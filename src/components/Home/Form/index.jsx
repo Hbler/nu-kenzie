@@ -36,9 +36,6 @@ export default function Form({ transactions, setTransactions, setToShow }) {
               });
               updateTransactions();
             }
-            setDescription("");
-            setValue("");
-            setType("");
           }}
         >
           <div className="form__line">

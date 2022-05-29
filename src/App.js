@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Home from "./components/Home";
+import WebFont from "webfontloader";
 
+import Home from "./components/Home";
 import LandingPage from "./components/LandingPage";
 import "./Global.css";
 
@@ -22,6 +23,14 @@ function App() {
     },
   ]);
 
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Nunito:300,400,600,800,900"],
+      },
+    });
+  }, []);
+
   return (
     <>
       {isLoggedIn ? (
@@ -29,9 +38,13 @@ function App() {
           setIsLoggedIn={setIsLoggedIn}
           transactions={transactions}
           setTransactions={setTransactions}
+          style={{ fontFamily: "Nunito" }}
         />
       ) : (
-        <LandingPage setIsLoggedIn={setIsLoggedIn} />
+        <LandingPage
+          setIsLoggedIn={setIsLoggedIn}
+          style={{ fontFamily: "Nunito" }}
+        />
       )}
     </>
   );
