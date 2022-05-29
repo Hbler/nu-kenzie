@@ -9,7 +9,7 @@ export default function Total({ transactions }) {
   const data2 = transactions.reduce((data, obj) => {
     return obj.type === "saída" ? (data += obj.value * -1) : data;
   }, 0);
-  console.log(transactions, data1, data2);
+
   const transactionData = {
     series: [
       {
