@@ -1,0 +1,47 @@
+.home__total {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 0 5%;
+
+  position: relative;
+}
+
+.total__container {
+  height: 20vh;
+  padding: 2%;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  position: relative;
+}
+
+.home__total h2 {
+  width: 45%;
+  height: fit-content;
+  font-size: 1.2rem;
+}
+
+.home__total h2:nth-child(2) {
+  color: #fd377e;
+  text-align: right;
+}
+
+.home__total small {
+  width: 100%;
+
+  align-self: flex-end;
+
+  color: #868e96;
+  text-align: center;
+}
+
+.total__bar {
+  left: 50%;
+  width: 100%;
+
+  transform: translateX(-50%);
+  position: absolute;
+}

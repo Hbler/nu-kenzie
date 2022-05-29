@@ -1,0 +1,19 @@
+.lp-alert {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  color: #f8faf9;
+  font-weight: 600;
+  font-size: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #212529cc;
+  backdrop-filter: blur(5px);
+
+  position: absolute;
+}
