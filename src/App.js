@@ -1,40 +1,39 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import Home from "./components/Home";
-import MainPage from "./components/MainPage";
-import "./App.css";
+
+import LandingPage from "./components/LandingPage";
+import "./Global.css";
 
 function App() {
-  const [windowSize, setWindowSize] = useState({
-    windowWidth: 0,
-    windowHeight: 0,
-  });
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [transactions, setTransactions] = useState([
+    {
+      description: "Salário recebido",
+      type: "entrada",
+      value: 15000,
+      id: uuidv4(),
+    },
+    {
+      description: "Conta de luz - Maio",
+      type: "saída",
+      value: -525,
+      id: uuidv4(),
+    },
+  ]);
 
-  useEffect(() => {
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-    return () => {
-      window.removeEventListener("resize", updateDimensions);
-    };
-  }, []);
-
-  const updateDimensions = () => {
-    let windowWidth = typeof window !== "undefined" ? window.innerWidth : 0;
-    let windowHeight = typeof window !== "undefined" ? window.innerHeight : 0;
-
-    setWindowSize({ windowWidth, windowHeight });
-  };
-
-  const { windowWidth } = windowSize;
   return (
-    <div className="App">
-      {!isLoggedIn ? (
-        <Home logingSetter={setIsLoggedIn} windowWidth={windowWidth} />
+    <>
+      {isLoggedIn ? (
+        <Home
+          setIsLoggedIn={setIsLoggedIn}
+          transactions={transactions}
+          setTransactions={setTransactions}
+        />
       ) : (
-        <MainPage logingSetter={setIsLoggedIn} windowWidth={windowWidth} />
+        <LandingPage setIsLoggedIn={setIsLoggedIn} />
       )}
-    </div>
+    </>
   );
 }
 

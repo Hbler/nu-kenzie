@@ -1,73 +1,70 @@
-import { useState } from "react";
-import img from "../../img/Home_detail.svg";
-import Logo from "../Global/Logo";
-import PinkButton from "../Global/PinkButton";
-import Login from "./Login";
-export default function Home({ logingSetter, windowWidth }) {
-  const [loginVisible, setLoginVisible] = useState(false);
-  const styles = {
-    main: {
-      width: "100vw",
-      height: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: "#212529",
-    },
-    info: {
-      width: windowWidth > 780 ? "30%" : "80%",
-      height: "100%",
-      color: "#f8f9fa",
-      display: "flex",
-      alignItems: windowWidth > 780 ? "flex-start" : "center",
-      flexDirection: "column",
-      justifyContent: "center",
-    },
-    h2: {
-      margin: "8% 0",
-      textAlign: windowWidth > 780 ? "left" : "center",
-      lineHeight: windowWidth > 768 ? "2.9rem" : "2.5rem",
-      fontSize: windowWidth > 768 ? "2.9rem" : "2.5rem",
-    },
-    decoration: {
-      width: "40%",
-      marginLeft: "3%",
-      display: windowWidth > 780 ? "block" : "none",
-    },
+import React, { useState } from "react";
+import { FaPlus, FaSignOutAlt } from "react-icons/fa";
+
+import { EventButton } from "../Global/AppBtns";
+import { AppLogo } from "../Global/GlobalComponents";
+import Form from "./Form";
+import FormModal from "./FormModal";
+import Total from "./Total";
+import List from "./List";
+import "./style.css";
+
+export default function Home({ setIsLoggedIn, transactions, setTransactions }) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [toShow, setToShow] = useState(transactions);
+
+  const goBack = () => {
+    setIsLoggedIn(false);
+  };
+
+  const showFormModal = () => {
+    setModalVisible(true);
   };
 
   return (
-    <main style={styles.main}>
-      {loginVisible && (
-        <Login
-          setter={logingSetter}
-          windowWidth={windowWidth}
-          visibility={setLoginVisible}
-        />
-      )}
-      <section style={styles.info}>
-        <Logo inHome={true} />
-        <h2 style={styles.h2}>
-          Centralize o<br /> controle das suas <br />
-          finanças
-        </h2>
-        <p>de forma rápida e segura</p>
-        <div
-          style={{
-            width: "50%",
-            height: "6%",
-            margin: "4% 0",
-          }}
-          onClick={() => {
-            setLoginVisible(true);
-          }}
-        >
-          <PinkButton str={"Acessar"} />
+    <>
+      <header className="home__header">
+        <div className="container small">
+          <AppLogo inHome={true}>
+            <span>Nu</span> Kenzie
+          </AppLogo>
+          <div className="header__btn">
+            <EventButton btnColor={"gray"} onClick={goBack} btnSize={"small"}>
+              <p className="btn__p">inicio</p>
+              <FaSignOutAlt className="btn__icon" />
+            </EventButton>
+          </div>
         </div>
-      </section>
-      <section style={styles.decoration}>
-        <img src={img} alt="" style={{ width: "100%", height: "100%" }} />
-      </section>
-    </main>
+      </header>
+      <main className="home__main">
+        <div className="container small">
+          {modalVisible && (
+            <FormModal
+              transactions={transactions}
+              setTransactions={setTransactions}
+              setToShow={setToShow}
+              setModalVisible={setModalVisible}
+            />
+          )}
+          <section className="home__left">
+            <Form
+              transactions={transactions}
+              setTransactions={setTransactions}
+              setToShow={setToShow}
+            />
+
+            {transactions.length > 0 && <Total transactions={transactions} />}
+          </section>
+          <List
+            transactions={transactions}
+            setTransactions={setTransactions}
+            toShow={toShow}
+            setToShow={setToShow}
+          />
+
+          <FaPlus className="home__btn--plus" onClick={showFormModal} />
+        </div>
+      </main>
+    </>
   );
 }
